@@ -1,0 +1,518 @@
+:root {
+  --void: #0d0a1a;
+  --panel: #1a1530;
+  --panel-raised: #231d3e;
+  --ghost: #e8e0f0;
+  --ghost-dim: #a098b8;
+  --pumpkin: #e8730a;
+  --slime: #4caf50;
+  --blood: #e74c3c;
+  --blood-text: #ef6a5b;
+  --mood: #9b59b6;
+  --bone: #f5e6c8;
+
+  --pixel-font: "Press Start 2P", monospace;
+  /* Press Start 2P 沒有中文字，中文交給系統字型。 */
+  --text-font: "Press Start 2P", "Microsoft JhengHei", "PingFang TC", "Noto Sans TC", sans-serif;
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--void);
+  color: var(--ghost);
+  font-family: var(--text-font);
+  font-size: 16px;
+  line-height: 1.7;
+  padding: 24px 16px 120px;
+}
+
+.pixel {
+  image-rendering: pixelated;
+}
+
+h1 {
+  margin: 4px 0 0;
+  font-size: 24px;
+  line-height: 1.4;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+:focus-visible {
+  outline: 2px solid var(--pumpkin);
+  outline-offset: 2px;
+}
+
+/* ---------- 版面 ---------- */
+
+.card {
+  position: relative;
+  z-index: 10;
+  max-width: 640px;
+  margin: 0 auto;
+  border: 2px solid var(--ghost);
+  background: var(--panel);
+  padding: 20px 16px;
+}
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.kicker {
+  margin: 0;
+  font-family: var(--pixel-font);
+  font-size: 12px;
+  color: var(--pumpkin);
+}
+
+.hint {
+  margin: 8px 0 0;
+  font-size: 14px;
+  color: var(--ghost-dim);
+}
+
+.error {
+  margin: 0;
+  font-size: 14px;
+  color: var(--blood-text);
+}
+
+/* ---------- 按鈕與表單 ---------- */
+
+.btn {
+  font: inherit;
+  font-size: 14px;
+  color: var(--ghost);
+  background: var(--panel);
+  border: 2px solid var(--ghost);
+  padding: 6px 12px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+.btn.primary {
+  border-color: var(--pumpkin);
+  color: var(--bone);
+  background: #3a2210;
+}
+
+.btn.ghost {
+  border-color: var(--ghost-dim);
+  color: var(--ghost-dim);
+}
+
+.btn.danger {
+  border-color: var(--blood);
+  color: var(--blood-text);
+}
+
+.task-form {
+  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.task-form label {
+  font-size: 14px;
+  color: var(--ghost-dim);
+}
+
+.task-form input:not([type="checkbox"]),
+.task-form select {
+  width: 100%;
+  font: inherit;
+  font-size: 16px;
+  color: var(--ghost);
+  background: var(--void);
+  border: 2px solid var(--ghost);
+  padding: 8px;
+}
+
+.task-form input:disabled {
+  opacity: 0.4;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1.6fr;
+  gap: 12px;
+}
+
+.task-form .check {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--ghost);
+}
+
+@media (max-width: 480px) {
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---------- 寵物 ---------- */
+
+.pet {
+  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.stage-name {
+  margin: 0 0 8px;
+  font-size: 14px;
+  color: var(--ghost-dim);
+}
+
+.sprite-wrap {
+  position: relative;
+  animation: pop 0.8s steps(3, end);
+}
+
+.sprite {
+  display: block;
+  width: 112px;
+  height: 112px;
+  animation: bob 1.2s steps(2, end) infinite;
+}
+
+.sprite.big {
+  width: 168px;
+  height: 168px;
+}
+
+.sprite-wrap.hurt::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--blood);
+  mix-blend-mode: multiply;
+  animation: hurt 0.3s steps(2, end);
+}
+
+.speech {
+  margin: 16px 0 0;
+  max-width: 420px;
+  border: 2px solid var(--ghost);
+  background: var(--panel-raised);
+  padding: 10px 12px;
+  font-size: 15px;
+}
+
+.stats {
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.stat {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+}
+
+.stat-label {
+  width: 3em;
+  text-align: right;
+}
+
+.stat-track {
+  width: 160px;
+  height: 14px;
+  border: 2px solid var(--ghost);
+  background: var(--panel);
+}
+
+.stat-fill {
+  height: 100%;
+  transition: width 0.15s ease-out;
+}
+
+.stat-fill.hp {
+  background: var(--pumpkin);
+}
+
+.stat-fill.hp.low {
+  background: var(--blood);
+}
+
+.stat-fill.hunger {
+  background: var(--slime);
+}
+
+.stat-fill.mood {
+  background: var(--mood);
+}
+
+.stat-value {
+  width: 2.5em;
+  text-align: left;
+  font-family: var(--pixel-font);
+  font-size: 11px;
+}
+
+.streak {
+  margin: 4px 0 0;
+  font-size: 13px;
+  color: var(--ghost-dim);
+}
+
+/* ---------- 任務 ---------- */
+
+.tasks {
+  margin-top: 24px;
+}
+
+.tasks > ul,
+.done-list ul {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.task {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  border: 2px solid var(--ghost-dim);
+  background: var(--panel);
+  padding: 10px 12px;
+}
+
+.task.overdue {
+  border-color: var(--blood);
+  background: #2a1320;
+}
+
+.task-main {
+  min-width: 0;
+}
+
+.task-title {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.task.done .task-title {
+  text-decoration: line-through;
+  color: var(--ghost-dim);
+}
+
+.task-meta {
+  margin: 4px 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--ghost-dim);
+}
+
+.tag {
+  border: 1px solid var(--ghost-dim);
+  padding: 0 6px;
+}
+
+.task.overdue .due {
+  color: var(--blood-text);
+}
+
+.task-actions {
+  display: flex;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+@media (max-width: 480px) {
+  .task {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .task-actions {
+    justify-content: flex-end;
+  }
+}
+
+details {
+  margin-top: 16px;
+}
+
+summary {
+  cursor: pointer;
+  font-size: 14px;
+  color: var(--ghost-dim);
+}
+
+details > ul,
+details > div {
+  margin-top: 8px;
+}
+
+.graveyard li {
+  display: flex;
+  flex-direction: column;
+  border-left: 2px solid var(--bone);
+  padding-left: 10px;
+  margin-bottom: 10px;
+  font-size: 14px;
+  color: var(--bone);
+  white-space: pre-line;
+}
+
+.demo {
+  border-top: 2px dashed var(--ghost-dim);
+  padding-top: 12px;
+  margin-top: 24px;
+}
+
+.demo-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* ---------- 殭屍、墓碑、CRT ---------- */
+
+.zombies {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.zombie {
+  position: absolute;
+  right: -48px;
+  width: 48px;
+  height: 48px;
+  animation: march 24s linear infinite;
+}
+
+.tombstone {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 16px;
+  text-align: center;
+  background: color-mix(in srgb, var(--void) 92%, transparent);
+  animation: fade-in 0.3s ease-out;
+}
+
+.stone {
+  width: 144px;
+  height: 192px;
+}
+
+.epitaph {
+  margin: 8px 0 0;
+  max-width: 320px;
+  white-space: pre-line;
+  color: var(--bone);
+}
+
+.tombstone .btn {
+  margin-top: 16px;
+}
+
+.crt {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  pointer-events: none;
+  background:
+    repeating-linear-gradient(
+      to bottom,
+      transparent 0 2px,
+      rgba(0, 0, 0, 0.18) 2px 4px
+    ),
+    radial-gradient(ellipse at center, transparent 55%, rgba(0, 0, 0, 0.72) 100%);
+}
+
+/* ---------- 動畫 ---------- */
+
+@keyframes bob {
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+@keyframes pop {
+  0% {
+    transform: scale(1);
+    filter: brightness(1);
+  }
+  40% {
+    transform: scale(1.15);
+    filter: brightness(1.8);
+  }
+  100% {
+    transform: scale(1);
+    filter: brightness(1);
+  }
+}
+
+@keyframes hurt {
+  50% {
+    opacity: 0.85;
+  }
+  0%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes march {
+  to {
+    transform: translateX(calc(-100vw - 96px));
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .zombie {
+    right: 16px;
+  }
+}
