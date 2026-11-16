@@ -1,4 +1,4 @@
-# 鬧鬼寵物待辦（簡化版）
+# 幽靈待辦
 
 做完任務餵飽幽靈寵物；逾期任務會生出殭屍吸血，HP 歸零變墓碑，再孵新蛋。
 由 `haunted-pet-todo`（Next.js + Supabase 版）簡化而來：純前端、無後端、只有繁體中文。
@@ -6,7 +6,8 @@
 ## 技術棧
 - Vite + React 19 + TypeScript，套件管理用 npm
 - 純 CSS（`src/styles.css`），不用 Tailwind 或動畫套件
-- 資料存 localStorage，key 為 `haunted-pet-lite:v1`
+- 資料存 localStorage，key 為 `haunted-pet-lite:v1`（專案改名前的舊名，刻意保留以免舊存檔消失）
+- 部署：Vercel 專案 `ghost-todo`，push 到 `main` 會自動部署，網址 https://ghost-todo.vercel.app
 - 測試：Vitest
 
 ## 常用指令

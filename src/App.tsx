@@ -18,8 +18,8 @@ export default function App() {
       <main className="card">
         <header className="topbar">
           <div>
-            <p className="kicker">HAUNTED PET</p>
-            <h1>鬧鬼寵物待辦</h1>
+            <p className="kicker">GHOST TODO</p>
+            <h1>幽靈待辦</h1>
           </div>
           <button className="btn" aria-pressed={!g.muted} onClick={g.toggleMuted}>
             {g.muted ? "🔇 靜音" : "🔊 音效"}
